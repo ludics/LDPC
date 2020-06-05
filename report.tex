@@ -119,7 +119,7 @@
 % \end{minipage}%
 % \end{figure}
 
-\section{构造射影平面LDPC码}
+\section{构造射影平面循环LDPC码}
 
 基于射影平面构造的循环LDPC码其实就是利用射影平面的点线关联矩阵。考虑在有限域$GF(2^s)$上的$m$维射影平面$PG(m,2^s)$。这个平面包含有$n$个点，其中$\displaystyle{n=(2^{(m+1)s}-1)/(2^s-1)}$。在$PG(m,2^s)$中有$\displaystyle{J=((2^{ms}+\cdots+2^s+1)(2^{(m-1)s}+\cdots+2^s+1))/(2^s+1)}$条直线，每条直线上包含有$2^s+1$个点，每个点上又有$\displaystyle{(2^{ms}-1)/(2^s-1)}$条线交叉。伽罗华域$GF(2^{(m+1)s})$是有限域$GF(2^s)$的扩展，且可以看做是射影平面$PG(m,2^s)$的一个实现。令$\alpha$为$GF(2^{(m+1)s})$的本原元，则$GF(2^{(m+1)s})$中的非零元素$\alpha^0,\alpha^1,\cdots,\alpha^{n-1}$组成了射影平面$PG(m,2^s)$中的点。设$\alpha^i,\alpha^j$是射影平面$PG(m,2^s)$中的两个线性独立的点，那么下面点的集合$\{\alpha^i+\beta\alpha^j:\beta\in GF(2^s)\}$就是$PG(m,2^s)$里通过点$\alpha^i$的一条线。两条线没有交点就是平行的，如果有交点也只能有一个交点。
 
@@ -197,7 +197,7 @@ C_i^{(2)} = \{\lambda g(x)x^i: \lambda \neq 0 \in GF(q)\}, \quad i=1,2,\dots, q+
 
 \section{译码错误概率分析}
 
-使用MATLAB编写了相关程序，实现了前述三种LDPC码的构造，见 \lstinline{./code} 文件夹内的\lstinline{generate_PG.m}、\lstinline{generate_BJ.m}、\lstinline{generate_Array.m}。其中生成PG-LDPC码的校验矩阵时，需要先运行 \lstinline{./code/pg_ldpc.m} 生成中间变量 \lstinline{GF} 与 \lstinline{points}，并将这两个变量作为参数输入 \lstinline{generate_PG} 函数。
+使用MATLAB编写了相关程序，实现了前述三种LDPC码的构造，见 \lstinline{./code} 文件夹内的 \lstinline{generate_PG.m}、\lstinline{generate_BJ.m}、\lstinline{generate_Array.m}。其中生成PG-LDPC码的校验矩阵时，需要先运行 \lstinline{./code/pg_ldpc.m} 生成中间变量 \lstinline{GF} 与 \lstinline{points}，并将这两个变量作为参数输入 \lstinline{generate_PG} 函数。
 
 使用MATLAB的通信工具箱对前面构造的三种LDPC码进行了编解码实验（见 \lstinline{./code/get_BER.m}），并绘制了对应的分组译码错误概率与比特译码错误概率曲线（见 \lstinline{./code/main.m}）。
 
