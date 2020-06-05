@@ -1,3 +1,4 @@
+clear;
 s = 5;
 q = 2^s;
 
@@ -10,10 +11,10 @@ GF = zeros(32768, 16);
 B = zeros(33, 16);
 
 alpha = [0, 1]; % alpha = "x"
-%for i=1:2^((m+1)*s)
-%    GF(i, 1:length(alpha)) = alpha;
-%    [tmp, alpha] = gfdeconv(gfconv(alpha, "x"), M);
-%end
+for i=1:2^((m+1)*s)
+    GF(i, 1:length(alpha)) = alpha;
+    [tmp, alpha] = gfdeconv(gfconv(alpha, "x"), M);
+end
 
 [q,gamma] = gfdeconv("x^"+num2str(n), M);
 beta = gamma;
@@ -34,7 +35,9 @@ for i=1:2^s
     end
 end
 
-ans = points(2:1024, 1:16);
+points = points(2:1024, 1:16);
+
+save('GF_points.mat', 'GF', 'points');
 
 
 

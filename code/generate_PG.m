@@ -1,49 +1,51 @@
-function [H] = generate_PG()
+function [H, idx] = generate_PG(GF, points)
 s = 5;
 q = 2^s;
 
 m = 2;
 n = q^2 + q + 1;
+k = n - (m+1)^s - 1;
 
-M = "x^15 + x^14 + x^13 + x^12 + x^11 + x^5 + x^4 + x^3 + x^2 + x + 1";
-%M = [1, 1,1,1,1,0, 0,0,0,0,1, 1,1,1,1,1]
-GF = zeros(32768, 16);
-B = zeros(33, 16);
-
-alpha = [0, 1]; % alpha = "x"
-for i=1:2^((m+1)*s)
-    GF(i, 1:length(alpha)) = alpha;
-    [~, alpha] = gfdeconv(gfconv(alpha, "x"), M);
+GF = string(GF);
+tmp = string(zeros(length(GF), 1));
+for i=1:length(GF)
+    tmp(i) = join(GF(i,:));
 end
+GF = tmp;
 
-[~, gamma] = gfdeconv("x^"+num2str(n), M);
-beta = gamma;
-for i=1:2^s   
-    %B(i+1, 1:length(beta)) = beta;
-    B(i+1, 1:length(beta)) = beta;
-    [~, beta] = gfdeconv(gfconv(beta, gamma), M);
+points = string(points);
+tmp = string(zeros(length(points), 1));
+for i=1:length(points)
+    tmp(i) = join(points(i,:));
 end
+points = tmp;
 
-alpha = [0, 1];
-beta = [1];
-points = zeros(1025, 16);
-for i=1:2^s
-    for j=1:2^s
-        combine = gfadd(gfconv(B(i, 1:16), alpha), gfconv(B(j, 1:16), beta));
-        [~, r] = gfdeconv(combine, M);
-        points((i-1)*(2^s)+j, 1:length(r)) = r;
+idx = [];
+for i=1:length(points)
+    try
+        idx = [idx, mod(find(GF==points(i)),n)];
+    catch
     end
 end
 
-res = points(2:1024, 1:16);
+idx = unique(idx);
 
-idx = []
-for i=1:length(res):
-    
+row = zeros(1, n);
+H = zeros(n - k, n);
 
-
+for i = 1:length(idx)
+    if(idx(i)==0)
+        row(n) = 1;
+    else
+        row(idx(i)) = 1;
+    end
 end
 
+row2 = [row, row];
 
+for i = 1:n-k
+    H(i,:) = row2(i:i+n-1);
+end
 
+end
 
