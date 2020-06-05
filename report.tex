@@ -4,7 +4,7 @@
 \documentclass[lang=cn,11pt,a4paper,numbers]{elegantpaper}
 % \setCJKmainfont[UprightFont = Songti SC Light, BoldFont=Songti SC Bold, ItalicFont=Kaiti SC, BoldItalicFont = Kaiti SC Bold]{Songti SC Regular}
 % \setmainfont{Times New Roman}
-\newfontfamily\menlo{Menlo}
+% \newfontfamily\menlo{Menlo}
 \newfontfamily\arial{Arial}
 \newcommand{\w}{\boldsymbol w}
 \newcommand{\x}{\boldsymbol x}
@@ -23,6 +23,8 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{url}
+\usepackage{amsmath}
+% \usepackage{bm}
 %%
 % \usepackage[T1]{fontenc}
 % \usepackage{libertine}
@@ -121,7 +123,7 @@
 
 基于射影平面构造的循环LDPC码其实就是利用射影平面的点线关联矩阵。考虑在有限域$GF(2^s)$上的$m$维射影平面$PG(m,2^s)$。这个平面包含有$n$个点，其中$\displaystyle{n=(2^{(m+1)s}-1)/(2^s-1)}$。在$PG(m,2^s)$中有$\displaystyle{J=((2^{ms}+\cdots+2^s+1)(2^{(m-1)s}+\cdots+2^s+1))/(2^s+1)}$条直线，每条直线上包含有$2^s+1$个点，每个点上又有$\displaystyle{(2^{ms}-1)/(2^s-1)}$条线交叉。伽罗华域$GF(2^{(m+1)s})$是有限域$GF(2^s)$的扩展，且可以看做是射影平面$PG(m,2^s)$的一个实现。令$\alpha$为$GF(2^{(m+1)s})$的本原元，则$GF(2^{(m+1)s})$中的非零元素$\alpha^0,\alpha^1,\cdots,\alpha^{n-1}$组成了射影平面$PG(m,2^s)$中的点。设$\alpha^i,\alpha^j$是射影平面$PG(m,2^s)$中的两个线性独立的点，那么下面点的集合$\{\alpha^i+\beta\alpha^j:\beta\in GF(2^s)\}$就是$PG(m,2^s)$里通过点$\alpha^i$的一条线。两条线没有交点就是平行的，如果有交点也只能有一个交点。
 
-令$PG(m,2^s)$中直线的关联矢量作为矩阵$\mathbf{H}_{PG}^{(1)}(m,0,s)$的行，射影平面$PG(m,2^s)$中的点对应于$\mathbf{H}_{PG}^{(1)}(m,0,s)$的列。$\mathbf{H}_{PG}^{(1)}(m,0,s)$行重为$\rho=2^s+1$，列重为$\displaystyle{\gamma=(2^{ms}-1)/(2^s-1)}$，密度为$\displaystyle{r=(2^{2s}-1)/(2^{(m+1)s}-1)}$。对$m\geq 2,s\geq 2$，$r$非常小，因此$\mathbf{H}_{PG}^{(1)}(m,0,s)$是一个低密度矩阵。它的零空间给出了一个长度为$n$的LDPC码$\mathbf{C}_{PG}^{(1)}(m,0,s)$，其最小距离至少为$(2^{ms}-1)/(2^s-1)+1$。校验位长度为$n-k=1+(C_{m+1}^m)^s$。
+令$PG(m,2^s)$中直线的关联矢量作为矩阵$\boldsymbol{H}_{PG}^{(1)}(m,0,s)$的行，射影平面$PG(m,2^s)$中的点对应于$\boldsymbol{H}_{PG}^{(1)}(m,0,s)$的列。$\boldsymbol{H}_{PG}^{(1)}(m,0,s)$行重为$\rho=2^s+1$，列重为$\displaystyle{\gamma=(2^{ms}-1)/(2^s-1)}$，密度为$\displaystyle{r=(2^{2s}-1)/(2^{(m+1)s}-1)}$。对$m\geq 2,s\geq 2$，$r$非常小，因此$\boldsymbol{H}_{PG}^{(1)}(m,0,s)$是一个低密度矩阵。它的零空间给出了一个长度为$n$的LDPC码$\boldsymbol{C}_{PG}^{(1)}(m,0,s)$，其最小距离至少为$(2^{ms}-1)/(2^s-1)+1$。校验位长度为$n-k=1+(C_{m+1}^m)^s$。
 
 实验要求构造 $q=32, n=q^2+q+1=1057$ 的 PG-LDPC 码。构造过程如下：
 \begin{enumerate}[1)]
@@ -130,6 +132,41 @@
     \item 需要求出经过某一点的任意一条不过原点的直线上的所有其他点。取$PG(2,2^5)$中的任意不同的两个点$\alpha^i,\alpha^j$，则通过这两个点的直线由$\{\eta_1\alpha^i+\eta_2\alpha^j\}$这样形式的点组成，且有$2^s+1$即33个不同的点，只需选择$\eta_1$与$\eta_2$，使得$(\eta_1,\eta_2)$不是另一个选择$(\eta_1',\eta_2')$的倍数即可。简单起见，我们取$i=0,j=1$，那么$\alpha^i=1,\alpha^j=\alpha$。最终得到含有33个点的一条直线。
     \item 得到直线后，由该直线求其关联矢量。该矢量由$n=1057$个点组成。如果某点在直线上，则关联矢量该点处值为1，否则为0.由所得的关联矢量作为校验矩阵的第一行，对该矢量向右循环移位1056次，每次得到的矢量均作为校验矩阵的一行。校验位数目为$1+(C_3^2)^5=244$，因此信息位的数目位813。校验矩阵的大小为$244\times 1057$，这样就得到了长为1057，信息位为813的二维射影平面LDPC码的校验矩阵。
 \end{enumerate}
+
+\section{基于循环置换矩阵的Array LDPC}
+基于循环置换矩阵的Array LDPC码是一种结构化的LDPC码构造方法，其构造过程主要由三个参数控制$p, j, k$，其中$p$
+为质数。在这种构造方法下，校验矩阵为
+\begin{equation*}
+\boldsymbol{H} = 
+\begin{bmatrix} 
+\boldsymbol{I} & \boldsymbol{I}            &\boldsymbol{I}        & \cdots & \boldsymbol{I} \\
+\boldsymbol{I} & \boldsymbol{\alpha}       &\boldsymbol{\alpha}^2 & \cdots & \boldsymbol{\alpha}^{k-1} \\
+\boldsymbol{I} & \boldsymbol{\alpha}^2     &\boldsymbol{\alpha}^4 & \cdots & \boldsymbol{\alpha}^{2(k-1)}\\
+\vdots         & \vdots                    &\vdots                & \ddots & \vdots \\
+\boldsymbol{I} & \boldsymbol{\alpha}^{j-1} &\boldsymbol{\alpha}^{2(j-1)}   & \cdots & \boldsymbol{\alpha}^{(j-1)(k-1)}\\
+\end{bmatrix}
+\end{equation*}
+其中$\boldsymbol{I}$是$p\times p$的单位矩阵，$\boldsymbol{\alpha}$是大小为$p\times p$的左移或右移一位的置换矩阵。例如，当$p=5$时
+\begin{equation}
+    \boldsymbol{\alpha} = 
+    \begin{bmatrix}
+        0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 1 \\
+        1 & 0 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    \text{ 或 }\quad
+    \boldsymbol{\alpha} = 
+    \begin{bmatrix}
+        0 & 0 & 0 & 0 & 1\\
+        1 & 0 & 0 & 0 & 0\\
+        0 & 1 & 0 & 0 & 0\\
+        0 & 0 & 1 & 0 & 0\\
+        0 & 0 & 0 & 1 & 0\\
+    \end{bmatrix}
+\end{equation}
+对于题目的要求可取$p=k=31, j = 5$
 \section{构造基于广义B-J码的准循环LDPC码}
 令$GF(q)$表示一个具有$q=2^m$离散元素的伽罗华域。令$[n,k,d]$表示一个码长为$n$，维度为$k$，最小距离为$d$的$q$元线性码。Berlekamp-Justesen(B-J)码是一类长度为$q+1$的MDS码$[q+1,k,q-k+2]$。为了得到围长尽可能大的B-J码，我们仅考虑$q=2^m,k=2$时的情形。可以看出$q$元$[q+1,2,q]$B-J码是$q$元Hamming码$[\frac{q^r-1}{q-1},\frac{q^r-1}{q-1}-r,3]$的对偶码，因此B-J码的生成矩阵就是对应Hamming码的校验矩阵。易知$q$元Hamming码$[\frac{q^r-1}{q-1},\frac{q^r-1}{q-1}-r,3]$的校验矩阵，并将其化为循环形式，就能够得到B-J码的生成矩阵。当$q=32$时，可得$q$元$[33,2,32]$B-J码的生成矩阵为：
 \\第一行：$[1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0]$
