@@ -1,4 +1,4 @@
-function [Hf] = generate_Hf()
+function [Hf] = generate_BJ()
 m = 5; % 2^m
 p = 2;
 q = 32; % q-ary field
