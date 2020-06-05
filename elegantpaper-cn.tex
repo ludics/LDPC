@@ -1,182 +1,417 @@
 %!TEX program = xelatex
 % 完整编译方法 1 pdflatex -> bibtex -> pdflatex -> pdflatex
 % 完整编译方法 2: xelatex -> bibtex -> xelatex -> xelatex
-\documentclass[lang=cn,11pt,numbers]{elegantpaper}
+\documentclass[lang=cn,11pt,a4paper,numbers]{elegantpaper}
+% \setCJKmainfont[UprightFont = Songti SC Light, BoldFont=Songti SC Bold, ItalicFont=Kaiti SC, BoldItalicFont = Kaiti SC Bold]{Songti SC Regular}
+% \setmainfont{Times New Roman}
+\newfontfamily\menlo{Menlo}
+\newfontfamily\arial{Arial}
+\newcommand{\w}{\boldsymbol w}
+\newcommand{\x}{\boldsymbol x}
+\newcommand{\g}{\boldsymbol g}
+\newcommand{\p}{\boldsymbol p}
+\newcommand{\z}{\boldsymbol z}
+\newcommand{\intd}{\textrm{d}}
+\newcommand{\e}{\textrm{e}}
+% \newcommand{\d}{}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{url}
+%%
+% \usepackage[T1]{fontenc}
+% \usepackage{libertine}
+% \usepackage[libertine]{newtxmath}
+%%
+% \usepackage[T1]{fontenc}
+% \usepackage{Alegreya}
+%%
+% \usepackage[T1]{fontenc}
+% \usepackage[urw-garamond]{mathdesign}
+%
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+% \usepackage{mathspec}
+% \setmainfont{Times New Roman}
+% \setmathsfont{Times New Roman}
 
-\title{ElegantPaper: 一个优美的 \LaTeX{} 工作论文模板}
-\author{\href{https://ddswhu.me/}{邓东升}}
+% \usepackage{bm}
+% \setCJKmainfont
+%   [
+%     UprightFont = Songti~SC~Light,
+%     BoldFont = Songti~SC~Bold,
+%     ItalicFont = Kaiti~SC,
+%     BoldItalicFont = Kaiti~SC~Bold
+%   ] {Songti~SC~Regular}
+% \setCJKsansfont { PingFang~SC }
+% \setCJKmonofont { STFangsong }
+% \setCJKfamilyfont { zhsong }
+%   [
+%     UprightFont = *~Light,
+%     BoldFont = *~Bold,
+%   ] { Songti~SC }
+% \setCJKfamilyfont { zhhei }  { Heiti~SC }
+% \setCJKfamilyfont { zhpf }   { PingFang~SC }
+% \setCJKfamilyfont { zhfs }   { STFangsong }
+% \setCJKfamilyfont { zhkai }  { Kaiti~SC }
 
-\institute{\href{https://elegantlatex.org/}{Elegant\LaTeX{} 项目组}}
+\title{信道编码大作业实验报告}
+\author{\kaishu\zihao{5} 夏志康\quad 刘祥\quad 芦迪\quad 吴舒登}
+% \linespread{2}
+% \linebreak
+% \newline
+\institute{清华大学深圳国际研究生院 信息科学与技术学部，深计研19班}
+% \linespread{3}
+
+% \institute{\href{https://elegantlatex.org/}{Elegant\LaTeX{} 项目组}}
 
 % 不需要版本信息，直接注释即可
-\version{0.07}
+% \version{0.07}
 % 不需要时间信息的话，需要把 \today 删除。
 \date{\today}
 
-
 \begin{document}
 
 \maketitle
 
-\begin{abstract}
-本文为 \href{https://github.com/ElegantLaTeX/ElegantPaper/}{ElegantPaper} 的说明文档（中文）。此模板基于 \LaTeX{} 的 article 类，专为工作论文写作而设计。设计这个模板的初衷是让作者不用关心工作论文的格式，专心写作，从而有更加舒适，简便的写作体验。如果你有其他问题、建议或者报告 bug，可以在 \href{https://github.com/ElegantLaTeX/ElegantPaper/issues}{ElegantPaper/issues} 留言。如果你想了解更多由 Elegant\LaTeX{} 项目组设计的模板，请访问 \href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}。
-\keywords{Elegant\LaTeX{}，工作论文，模板}
-\end{abstract}
+% \begin{abstract}
+% 本文为 \href{https://github.com/ElegantLaTeX/ElegantPaper/}{ElegantPaper} 的说明文档（中文）。此模板基于 \LaTeX{} 的 article 类，专为工作论文写作而设计。设计这个模板的初衷是让作者不用关心工作论文的格式，专心写作，从而有更加舒适，简便的写作体验。如果你有其他问题、建议或者报告 bug，可以在 \href{https://github.com/ElegantLaTeX/ElegantPaper/issues}{ElegantPaper/issues} 留言。如果你想了解更多由 Elegant\LaTeX{} 项目组设计的模板，请访问 \href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}。
+% \keywords{Elegant\LaTeX{}，工作论文，模板}
+% \end{abstract}
 
+\section{分工情况}
 
-\section{模板介绍}
+% \begin{lstlisting}[frame=single, language=bash, basicstyle=\footnotesize\menlo]
+% git clone https://github.com/openai/baselines.git && cd baselines
+% pip install -e .
+% \end{lstlisting}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=4cm]{figure/ppo2_pong_vis.png}
+%     \caption{Training Atari Pong by PPO \label{fig:ppo2_pong}}
+% \end{figure}
 
-此模板是基于 \LaTeX{} 的标准文类 article设计，也即意味着你可以把 article 文类的选项传递给本模板，比如 \lstinline{a4paper, 10pt} 等等（推荐使用 \lstinline{11pt}）。本模板支持 \lstinline{PDFLaTeX} 和 \lstinline{XeLaTeX}\footnote{中文字体均使用 \lstinline{ctex} 包设置。} 两种编译方式。
+% \begin{figure}[htbp]
+% \begin{minipage}[t]{0.33\linewidth}
+% \centering
+% \includegraphics[width=2.0in]{figure/a2c_20m_pong.png}
+% \caption{Our Score}
+% \label{fig:a2c_reward}
+% \end{minipage}%
+% \begin{minipage}[t]{0.33\linewidth}
+% \centering
+% \includegraphics[width=2.0in, height=1.6in]{figure/a3c_score_paper.png}
+% \caption{Score From Paper}
+% \label{fig:a2c_paper}
+% \end{minipage}
+% \begin{minipage}[t]{0.33\linewidth}
+% \centering
+% \includegraphics[width=2.0in]{figure/a2c_20m_loss.png}
+% \caption{Value Loss}
+% \label{fig:a2c_loss}
+% \end{minipage}%
+% \end{figure}
 
-数学字体的效果如下：
-\begin{equation}
-(a+3b)^{n} = \sum_{k=0}^{n} C_{n}^{k} a^{n-k} (3b)^k\label{eq:binom}
-\end{equation}
-      
-\subsection{全局选项}
-我在这个模板中定义了一个语言选项 \lstinline{lang}，可以选择英文模式 \lstinline{lang=en}（默认）或者中文模式 \lstinline{lang=cn}。当选择中文模式时，图表的标题引导词以及参考文献，定理引导词等信息会变成中文。你可以通过下面两种方式来选择语言模式：
-\begin{lstlisting}
-\documentclass[lang=cn]{elegantpaper} % or
-\documentclass{cn}{elegantpaper} 
-\end{lstlisting}
+\section{构造射影平面LDPC码}
 
+基于射影平面构造的循环LDPC码其实就是利用射影平面的点线关联矩阵。考虑在有限域$GF(2^s)$上的$m$维射影平面$PG(m,2^s)$。这个平面包含有$n$个点，其中$\displaystyle{n=(2^{(m+1)s}-1)/(2^s-1)}$。在$PG(m,2^s)$中有$\displaystyle{J=((2^{ms}+\cdots+2^s+1)(2^{(m-1)s}+\cdots+2^s+1))/(2^s+1)}$条直线，每条直线上包含有$2^s+1$个点，每个点上又有$\displaystyle{(2^{ms}-1)/(2^s-1)}$条线交叉。伽罗华域$GF(2^{(m+1)s})$是有限域$GF(2^s)$的扩展，且可以看做是射影平面$PG(m,2^s)$的一个实现。令$\alpha$为$GF(2^{(m+1)s})$的本原元，则$GF(2^{(m+1)s})$中的非零元素$\alpha^0,\alpha^1,\cdots,\alpha^{n-1}$组成了射影平面$PG(m,2^s)$中的点。设$\alpha^i,\alpha^j$是射影平面$PG(m,2^s)$中的两个线性独立的点，那么下面点的集合$\{\alpha^i+\beta\alpha^j:\beta\in GF(2^s)\}$就是$PG(m,2^s)$里通过点$\alpha^i$的一条线。两条线没有交点就是平行的，如果有交点也只能有一个交点。
 
-\subsection{自定义命令}
-在此模板中，并没有修改任何默认的命令或者环境，所以，你可以在此模板使用原来的命令和环境。另外，我自定义了 4 个命令：
-\begin{enumerate}
-	\item \lstinline{\email}：创建邮箱地址的链接；
-	\item \lstinline{\figref}：用法和 \lstinline{\ref} 类似，但是会在插图的标题前添加 <\textbf{图 n}> ；
-	\item \lstinline{\tabref}：用法和 \lstinline{\ref} 类似，但是会在表格的标题前添加 <\textbf{表 n}>；
-	\item \lstinline{\keywords}：为摘要环境添加关键词。
+令$PG(m,2^s)$中直线的关联矢量作为矩阵$\mathbf{H}_{PG}^{(1)}(m,0,s)$的行，射影平面$PG(m,2^s)$中的点对应于$\mathbf{H}_{PG}^{(1)}(m,0,s)$的列。$\mathbf{H}_{PG}^{(1)}(m,0,s)$行重为$\rho=2^s+1$，列重为$\displaystyle{\gamma=(2^{ms}-1)/(2^s-1)}$，密度为$\displaystyle{r=(2^{2s}-1)/(2^{(m+1)s}-1)}$。对$m\geq 2,s\geq 2$，$r$非常小，因此$\mathbf{H}_{PG}^{(1)}(m,0,s)$是一个低密度矩阵。它的零空间给出了一个长度为$n$的LDPC码$\mathbf{C}_{PG}^{(1)}(m,0,s)$，其最小距离至少为$(2^{ms}-1)/(2^s-1)+1$。
+
+实验要求构造 $q=32, n=q^2+q+1=1057$ 的 PG-LDPC 码。构造过程如下：
+\begin{enumerate}[1)]
+    \item 由 $\displaystyle{q=2^s, n=(2^{(m+1)s}-1)/(2^s-10}$ 得$m=2,s=5$，即要考虑有限域$GF(2^5)$上的2维射影平面$PG(2,2^5)$。$PG(2,2^5)$中的点是有$GF(2^{(m+1)s})=GF(2^{15})$中的元素表示的，可以先构造伽罗华域$GF(2^{15})$。$GF(2^{15})$是由本原多项式$p(x)=x^{15}+x^{14}+x^{13}+x^{12}+x^{11}+x^5+x^4+x^3+x^2+x^1+1$生成的。由此，我们可以得到$GF(2^{15})$。
+    \item 令$\alpha$为$GF(2^{15})$的一个本原元。令$\beta=\alpha^n$，则$\beta$的阶为$2^s-1$，$\{0,1,\beta,\beta^2,\cdots,\beta^{2^s-2}\}$可以构成$GF(2^5)$。令$\Gamma = \{\alpha^0,\alpha^1,\alpha^2,\cdots,\alpha^{n-1}\}$，则$\{\alpha^i,\beta\alpha^i,\beta^2\alpha^i,\cdots,\beta^{2^s-2}\alpha^i\}$可将$GF(2^{15})$划分为$n$个不相交的子集。
+    \item 需要求出经过某一点的任意一条不过原点的直线上的所有其他点。取$PG(2,2^5)$中的任意不同的两个点$\alpha^i,\alpha^j$，则通过这两个点的直线由$\{\eta_1\alpha^i+\eta_2\alpha^j\}$这样形式的点组成，且有$2^s+1$即33个不同的点，只需选择$\eta_1$与$\eta_2$，使得$(\eta_1,\eta_2)$不是另一个选择$()\eta_1',\eta_2')$的倍数即可。简单起见，我们取$i=0,j=1$，那么$\alpha^i=1,\alpha^j=\alpha$。最终得到含有33个点的一条直线。
+    \item 得到直线后，由该直线求其关联矢量。该矢量由$n=1057$个点组成。如果某点在直线上，则关联矢量该点处值为1，否则为0.由所得的关联矢量作为校验矩阵的第一行，对该矢量向右循环移位1056次，每次得到的矢量均作为校验矩阵的一行，就得到了长为1057，信息位为813的二维射影平面LDPC码的校验矩阵。
 \end{enumerate}
 
-\subsection{列表环境}
-你可以使用列表环境（\lstinline{itemize}、\lstinline{enumerate}、\lstinline{description}），示例如下：\\[2ex]
-\begin{minipage}[c]{0.59\linewidth}
-\begin{lstlisting}
-\begin{itemize}
-   \item Routing and resource discovery;
-   \item Resilient and scalable networks; 
-   \item Distributed storage and search.
-\end{itemize}
-\end{lstlisting}
-\end{minipage}
-\begin{minipage}[c]{0.4\linewidth}
-\begin{itemize}
-   \item Routing and resource discovery;
-   \item Resilient and scalable networks;
-   \item Distributed storage and search.
-\end{itemize}
-\end{minipage}
 
+\section{总结}
 
-\subsection{插图}
-插图的命令和以前一样，也是使用 \lstinline{figure} 环境。\figref{fig:scatter} 显示了插图的效果。你可以把你的图放到当前工作目录的如下子目录下 (\lstinline{./image/}, \lstinline{./img/}, \lstinline{./figure/}, \lstinline{./fig/})。
-\begin{lstlisting}
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.6\textwidth]{scatter.pdf}
-	\caption{Scatter Plot Example \label{fig:scatter}}
-\end{figure}
-\end{lstlisting}
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.6\textwidth]{scatter.pdf}
-	\caption{Scatter Plot Example \label{fig:scatter}}
-\end{figure}
-
-\subsection{表格}
-建议使用 \lstinline{booktabs} 宏包制作表格，该宏包有三个命令 \lstinline{\toprule}、\lstinline{\midrule} 和 \lstinline[breaklines]{\bottomrule} 能方便你制作三线表。\tabref{tab:reg} 是一个示例：
-\begin{lstlisting}
-\begin{table}[htbp]
-  \small
-  \centering
-  \caption{Auto MPG and Price \label{tab:reg}}
-    \begin{tabular}{lcc}
-    \toprule
-                    &       (1)         &        (2)      \\
-    \midrule
-    mpg             &    -238.90***     &      -49.51     \\
-                    &     (53.08)       &      (86.16)    \\
-    weight          &                   &      1.75***    \\
-                    &                   &      (0.641)    \\
-    constant        &     11,253***     &       1,946     \\
-                    &     (1,171)       &      (3,597)    \\
-    obs             &        74         &         74      \\
-    $R^2$           &      0.220        &       0.293     \\
-    \bottomrule
-    \multicolumn{3}{l}{\scriptsize Standard errors in parentheses} \\
-    \multicolumn{3}{l}{\scriptsize *** p<0.01, ** p<0.05, * p<0.1} \\
-    \end{tabular}%
-\end{table}%
-\end{lstlisting}
-\begin{table}[htbp]
-  \small
-  \centering
-  \caption{Auto MPG and Price \label{tab:reg}}
-    \begin{tabular}{lcc}
-    \toprule
-                    &       (1)         &        (2)      \\
-    \midrule
-    mpg             &    -238.90***     &      -49.51     \\
-                    &     (53.08)       &      (86.16)    \\
-    weight          &                   &      1.75***    \\
-                    &                   &      (0.641)    \\
-    constant        &     11,253***     &       1,946     \\
-                    &     (1,171)       &      (3,597)   \\
-    obs             &        74         &         74     \\
-    $R^2$           &      0.220        &       0.293    \\
-    \bottomrule
-    \multicolumn{3}{l}{\scriptsize Standard errors in parentheses} \\
-    \multicolumn{3}{l}{\scriptsize *** p<0.01, ** p<0.05, * p<0.1} \\
-    \end{tabular}%
-\end{table}%
+本次实验，安装部署了强化学习实验框架，阅读了一系列深度强化学习的论文，运行了一系列相关实验，可谓受益匪浅。强化学习确实是十分有趣的研究课题，但由于时间比较紧，很多算法细节仍然不甚了了，希望在以后的学习科研中能够继续深入了解。
 
 
 
-\subsection{参考文献}
-此模板使用了 Bib\TeX{} 来生成参考文献，默认使用的文献样式（bib style）是 \lstinline{GB/T 7714-2015}\footnote{通过调用 \href{https://ctan.org/pkg/gbt7714}{\lstinline{gbt7714}} 宏包}。参考文献示例：~\cite{en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+% \subsection{实验目的}
 
-你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{wpref.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 Bib\TeX{} 编译。如果你想在参考文献中添加未引用的文献（部分或者全部），可以使用
-\begin{lstlisting}
-\nocite{EINAV2010, Havrylchyk2018} % add the two reference.
-\nocite{*}   % add all the reference in the bib file.
-\end{lstlisting}
+% 学习掌握神经网络相关原理，并将其应用于实际数据集的分类问题。
+% \subsection{实验数据}
 
-\section{示例}
-在这部分，我提供一个示例文档：
-\begin{lstlisting}
-\documentclass[lang=cn]{elegantpaper}
+% MNIST数据集是由Yann Lecun提供的手写数字数据集，主要包含了60000张的训练图像和10000张的测试图像，囊括了各种手写数字图片。
 
-% title information
-\title{A Working Paper Example}
-\author{ddswhu} 
-\institute{Elegant\LaTeX{} Group}
-\version{1.00}
-\date{\today}
 
-\begin{document}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=7cm]{figure/mnist_sample.png}
+%     \caption{MNIST 图片示例 \label{fig:data}}
+% \end{figure}
 
-\maketitle
 
-\begin{abstract}
-Your abstract goes here.
-\keywords{keyword1, keyword2}
-\end{abstract}
 
-\section{Introduction}
-The content of introduction section.
+% \subsection{任务要求}
 
-\section{Conclusion}
-The content of conclusion section.
+% \begin{enumerate}
+%     \item 自己手动搭建神经网络，实现前后向，参数更新。神经网络结构不限,建议使用CNN；
+%     \item 利用训练好的神经网络对测试集进行分类；
+%     \item 依据初步的分类结果，对所设计的网络结构进行分析与改进；
+%     \item 分析实验结果，与前两次实验（模式识别第一次实验和第二次实验）结果进行对比分析。
+% \end{enumerate}
 
-% include the noncited reference
-\nocite{ref1, ref2}
-\bibliography{wpref}
-\end{document}
-\end{lstlisting}
+% \subsection{参考方案}
 
-\nocite{*}
+% \begin{enumerate}
+%     \item 网络结构：卷积层 -> 激活层 ->池化层 ->全连接层->分类层；
+%     \item 初始化：零均值正态分布；
+%     \item 优化器：随机梯度下降 SGD；
+%     \item 并行计算：将 conv 和 fc 转换为矩阵计算，代替循环计算。
+% \end{enumerate}
+
+% \subsection{注意事项}
+% \begin{enumerate}
+%     \item 独立完成；
+%     \item 在实验报告中用图形方式展示所设计的网络结构；编程语言自选，代码中要包含神经网络搭建，训练及测试的基本步骤；
+%     \item 上述为基本任务要求，占本次实验分数的百分之80。其余百分之20的分数，留给实验过程中独到的思考和创新点；
+%     \item 实验报告提交为PDF格式。
+% \end{enumerate}
+
+% \section{实现方法}
+
+% \subsection{总体说明}
+% 使用 Python 与 numpy 实现了简单的神经网络，称为 numpy\_cnn。
+
+% 神经网络的训练过程可以分为输入数据、前向传播、计算损失、反向传播梯度、更新参数几个阶段，而主要的运算则可以分为数据在网络层间的流动、损失的计算、参数的更新这三种。考虑到以上不同类型的运算，将numpy\_cnn分为了以下几个层次组件：
+% \begin{itemize}
+%     \item Tensor 张量：可学习参数使用Tensor，内部保存参数的值与梯度，底层直接使用 numpy 的 ndarray；数据与梯度也都用 numpy 的 ndarray 表示；
+%     \item layers 网络层：网络层接收输入，进行运算并输出结果；所有的网络层都有前向传播与反向传播运算；
+%     \item loss 损失函数：给定网络输出值与真实值，损失函数计算损失值与最后一层的梯度；
+%     \item net 网络：网络将多个网络层组合起来，实现数据与梯度的流动；
+%     \item optimizer 优化器：完成反向传播得到梯度后，使用优化器对可学习参数进行更新。
+% \end{itemize}
+
+% 基于实现的各个组件，整体的流程为：
+
+% \begin{lstlisting}[frame=single, language=python, basicstyle=\footnotesize\menlo, caption=Pipeline\label{lst:pipeline}]
+% # 构建网络、损失函数、优化器
+% net = Net([layer1, layer2, ...])
+% loss_f = CrossEntropyLoss()
+% optimizer = Adam(net.parameters)
+
+% # 训练过程
+% for epoch in range(num_epochs):
+%     for X, y in data_itetator():
+%         # 前向传播
+%         preds = net.forward(X)
+%         # 计算 loss 与最后一层的梯度
+%         l = loss_f.loss(preds, y)
+%         grad = loss_f.grad(preds, y)
+%         # 梯度反传
+%         net.backward(grad)
+%         # 参数更新
+%         optimizer.update()
+
+% # 推断过程
+% test_preds = net.forward(X_test)
+% \end{lstlisting}
+
+% \subsection{各模块实现}
+
+% \subsubsection{Tensor}
+
+% 我们实现的Tensor很简单，就是把两个numpy.ndarray组合在了一起。如前面所说，可学习参数用Tensor，而net.parameters就是网络所有的可学习参数组成的列表，代码 \ref{lst:pipeline} 中我们将其传给了优化器。通过这种设计，优化器就可以用Tensor内的梯度对参数值进行更新，比较方便。
+
+% \subsection{网络层}
+
+% 我们主要实现了2维卷积、2维最大池化、全连接以及ReLU激活层。每个网络层都需要实现forward函数与backward函数，分别进行前向传播与反向传播的计算，代码 \ref{lst:pipeline} 中网络的前向传播与反向传播实际上就是依次调用各网络层的forward 与 backward 函数。
+
+% 在实现的网络层中，全连接层与卷积层有可学习参数，而池化层与激活层则没有。全连接层中，我们在forward函数中计算$wx+b$，其中$x$、$w$、$b$分别为输入、权重和偏置，并将计算后的结果输出以便继续传递；而backward函数则接收来自后一层回传的梯度，并计算其关于$w$、$b$和$x$的梯度，关于$w$和$b$的梯度保存到相应Tensor中用于更新参数，而关于$x$的梯度则作为函数的返回值用于继续回传。
+
+% 卷积层的实现中，除了上一段中提到的内容外，还要考虑 padding 的影响，也就是backward函数最后输出的应该是关于不进行padding的 $x$ 的梯度。此外，由于卷积操作中循环较多，直接计算效率很低，我们使用了著名的im2col方法，将卷积操作转化成了两个矩阵相乘，这两个矩阵分别对应与输入数据与卷积核。因为numpy对矩阵相乘等运算进行了很多优化，这种转化可以大大提升网络的效率。
+
+% 池化层与激活层没有可学习参数，它们的backward函数只需计算后一层回传来的梯度对输入数据的梯度，再将计算得到的梯度输出即可。
+
+% 在具体实现时，我们也参考了一些网上的博客与代码，如 \url{https://github.com/leeroee/NN-by-Numpy}。
+
+% \subsection{损失函数}
+
+% 损失函数需要计算损失值与关于预测值的梯度。因为要解决分类问题，我们实现了多分类问题中常用的Softmax交叉熵损失函数。
+
+% 设模型的输出为$o$，类别数为$K$，可以使用Softmax计算概率分布，结果为
+% \[\hat{y}_k = \frac{\exp(o_k)}{\sum_{k=1}^K \exp(o_k)}\]
+% 而多分类下的交叉熵损失为
+% \[J_{CE}(y,\hat{y}) = -\sum_{i=1}^N\sum_{k=1}^K y^{(i)}_k \log(\hat{y}^{(i)}_k)=-\sum_{i=1}^N \log(\hat{y}^{(i)}_c) = -\sum_{i=1}^N (o^{(i)}_c - \log(\sum_{k=1}^K\exp(o^{(i)}_k)))\]
+% 其中$N$为样本数目，$c$表示真实类别。再求交叉熵损失$J_{CE}$关于$o$的梯度即可。
+
+% \subsection{优化器}
+
+% 代码 \ref{lst:pipeline} 中我们将网络的参数net.parameters传给了优化器。net.parameters是整个网络所有可学习参数Tensor的列表，在网络完成反向传播后，Tensor中保存着参数的值与梯度，利用 optimizer.update() 就对参数进行了更新。
+
+% 开始时使用了随机梯度下降法SGD，但网络收敛比较慢。后来参考\cite{kingma2014adam}与\cite{zhang2019dive}实现了Adam算法，收敛速度快了很多。
+
+% \subsection{网络参数初始化}
+
+% 全连接层与卷积层的权重参数使用XavierUniform方法\cite{glorot2010understanding}进行初始化，而偏置参数则初始化为0。
+
+% \section{实验与结果分析}
+
+% 分别使用了一个只有全连接层与ReLU激活层的全连接网络和一个类似于LeNet的网络两种模型进行了实验。LeNet的网络结构如图所示。
+
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.6\textwidth]{figure/lenet.png}
+% 	\caption{LeNet 网络结构 \label{fig:lenet}}
+% \end{figure}
+
+% 我们的全连接网络使用了三个全连接层，两个激活层，称为fc-net，其网络定义为：
+% \begin{lstlisting}[frame=single, language=python, basicstyle=\footnotesize\menlo]
+% net = Net([
+%     layers.Linear(784, 400),
+%     layers.ReLU(),
+%     layers.Linear(400, 100),
+%     layers.ReLU(),
+%     layers.Linear(100, 10)
+% ])
+% \end{lstlisting}
+
+% 使用的卷积网络与LeNet比较像，但也有些差别，用了两个卷积层，三个全连接层，称为conv-net，其网络定义为：
+% \begin{lstlisting}[frame=single, language=python, basicstyle=\footnotesize\menlo]
+% net = Net([
+%     layers.Conv2d(1, 6, k_size=(5, 5), stride=(1, 1), padding=(2, 2)),
+%     layers.ReLU(),
+%     layers.MaxPool2d(k_size=[2, 2], stride=[2, 2]),
+%     layers.Conv2d(6, 16, k_size=[5, 5], stride=[1, 1]),
+%     layers.ReLU(),
+%     layers.MaxPool2d(k_size=[2, 2], stride=[2, 2]),
+%     layers.Reshape(-1),
+%     layers.Linear(400, 120),
+%     layers.ReLU(),
+%     layers.Linear(120, 84),
+%     layers.ReLU(),
+%     layers.Linear(84, 10)
+% ])
+% \end{lstlisting}
+
+% 某次训练中，fc-net在14个epoch后，测试集准确率取得最佳结果，为 98.64\%；某次训练中，conv-net在12个epoch后取得最佳结果，为99.16\%。整体来看，conv-net的结果优于fc-net。不过，在我们的机器上，fc-net训练一个epoch只需要6.2秒左右，而conv-net一个epoch需要76秒左右。
+
+% 在第一次实验中，使用PCA降为+贝叶斯判决+最大似然估计，最高的准确率为96.37；而第二次实验中，使用线性判别器进行二分类，一些易分类别准确率接近1，而有些类别则只有94\%左右。可见，神经网络方法确实优于传统方法。
+
+% \section{总结}
+
+% 本次实验，实现了一个简单的神经网络模型，学到了很多东西。感谢助教和老师一些学期的教导和帮助。
+
+% \section{模板介绍}
+
+% 此模板是基于 \LaTeX{} 的标准文类 article设计，也即意味着你可以把 article 文类的选项传递给本模板，比如 \lstinline{a4paper, 10pt} 等等（推荐使用 \lstinline{11pt}）。本模板支持 \lstinline{PDFLaTeX} 和 \lstinline{XeLaTeX}\footnote{中文字体均使用 \lstinline{ctex} 包设置。} 两种编译方式。
+
+
+% 数学字体的效果如下：
+% \begin{equation}
+% (a+3b)^{n} = \sum_{k=0}^{n} C_{n}^{k} a^{n-k} (3b)^k\label{eq:binom}
+% \end{equation}
+      
+% \subsection{全局选项}
+% 我在这个模板中定义了一个语言选项 \lstinline{lang}，可以选择英文模式 \lstinline{lang=en}（默认）或者中文模式 \lstinline{lang=cn}。当选择中文模式时，图表的标题引导词以及参考文献，定理引导词等信息会变成中文。你可以通过下面两种方式来选择语言模式：
+% \begin{lstlisting}
+% \documentclass[lang=cn]{elegantpaper} % or
+% \documentclass{cn}{elegantpaper} 
+% \end{lstlisting}
+
+
+% \subsection{自定义命令}
+% 在此模板中，并没有修改任何默认的命令或者环境，所以，你可以在此模板使用原来的命令和环境。另外，我自定义了 4 个命令：
+% \begin{enumerate}
+% 	\item \lstinline{\email}：创建邮箱地址的链接；
+% 	\item \lstinline{\figref}：用法和 \lstinline{\ref} 类似，但是会在插图的标题前添加 <\textbf{图 n}> ；
+% 	\item \lstinline{\tabref}：用法和 \lstinline{\ref} 类似，但是会在表格的标题前添加 <\textbf{表 n}>；
+% 	\item \lstinline{\keywords}：为摘要环境添加关键词。
+% \end{enumerate}
+
+% \subsection{列表环境}
+% 你可以使用列表环境（\lstinline{itemize}、\lstinline{enumerate}、\lstinline{description}），示例如下：\\[2ex]
+% \begin{minipage}[c]{0.59\linewidth}
+% \begin{lstlisting}
+% \begin{itemize}
+%    \item Routing and resource discovery;
+%    \item Resilient and scalable networks; 
+%    \item Distributed storage and search.
+% \end{itemize}
+% \end{lstlisting}
+% \end{minipage}
+% \begin{minipage}[c]{0.4\linewidth}
+% \begin{itemize}
+%    \item Routing and resource discovery;
+%    \item Resilient and scalable networks;
+%    \item Distributed storage and search.
+% \end{itemize}
+% \end{minipage}
+
+
+% \subsection{插图}
+% 插图的命令和以前一样，也是使用 \lstinline{figure} 环境。\figref{fig:scatter} 显示了插图的效果。你可以把你的图放到当前工作目录的如下子目录下 (\lstinline{./image/}, \lstinline{./img/}, \lstinline{./figure/}, \lstinline{./fig/})。
+% \begin{lstlisting}
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.6\textwidth]{scatter.pdf}
+% 	\caption{Scatter Plot Example \label{fig:scatter}}
+% \end{figure}
+% \end{lstlisting}
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.6\textwidth]{scatter.pdf}
+% 	\caption{Scatter Plot Example \label{fig:scatter}}
+% \end{figure}
+
+
+
+
+% \subsection{参考文献}
+% 此模板使用了 Bib\TeX{} 来生成参考文献，默认使用的文献样式（bib style）是 \lstinline{GB/T 7714-2015}\footnote{通过调用 \href{https://ctan.org/pkg/gbt7714}{\lstinline{gbt7714}} 宏包}。参考文献示例：~\cite{en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+
+% 你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{wpref.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 Bib\TeX{} 编译。如果你想在参考文献中添加未引用的文献（部分或者全部），可以使用
+% \begin{lstlisting}
+% \nocite{EINAV2010, Havrylchyk2018} % add the two reference.
+% \nocite{*}   % add all the reference in the bib file.
+% \end{lstlisting}
+
+% \section{示例}
+% 在这部分，我提供一个示例文档：
+% \begin{lstlisting}
+% \documentclass[lang=cn]{elegantpaper}
+
+% % title information
+% \title{A Working Paper Example}
+% \author{ddswhu} 
+% \institute{Elegant\LaTeX{} Group}
+% \version{1.00}
+% \date{\today}
+
+% \begin{document}
+
+% \maketitle
+
+% \begin{abstract}
+% Your abstract goes here.
+% \keywords{keyword1, keyword2}
+% \end{abstract}
+
+% \section{Introduction}
+% The content of introduction section.
+
+% \section{Conclusion}
+% The content of conclusion section.
+
+% % include the noncited reference
+% \nocite{ref1, ref2}
+% \bibliography{wpref}
+% \end{document}
+% \end{lstlisting}
+
+% \nocite{*}
 \bibliography{wpref}
 
 \end{document}

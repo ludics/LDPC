@@ -1,71 +1,157 @@
+@book{zhang2019dive,
+    title={Dive into Deep Learning},
+    author={Aston Zhang and Zachary C. Lipton and Mu Li and Alexander J. Smola},
+    note={\url{http://www.d2l.ai}},
+    year={2019}
+}
 
-@article{en3,
-  title={{The Mechanism and Effectiveness of Credit Scoring of P2P Lending Platform: Evidence from Renrendai.com}},
-  author={Li, Qiang and Chen, Liwen and Zeng, Yong},
-  journal={China Finance Review International},
-  volume={8},
-  number={3},
-  pages={256--274},
-  year={2018},
-  publisher={Emerald Publishing Limited}
+@article{kingma2014adam,
+  title={Adam: A method for stochastic optimization},
+  author={Kingma, Diederik P and Ba, Jimmy},
+  journal={arXiv preprint arXiv:1412.6980},
+  year={2014}
+}
+
+@inproceedings{glorot2010understanding,
+  title={Understanding the difficulty of training deep feedforward neural networks},
+  author={Glorot, Xavier and Bengio, Yoshua},
+  booktitle={Proceedings of the thirteenth international conference on artificial intelligence and statistics},
+  pages={249--256},
+  year={2010}
+}
+
+@article{Degris2012,
+abstract = {This paper presents the first actor-critic algorithm for off-policy reinforcement learning. Our algorithm is online and incremental, and its per-time-step complexity scales linearly with the number of learned weights. Previous work on actor-critic algorithms is limited to the on-policy setting and does not take advantage of the recent advances in off-policy gradient temporal-difference learning. Off-policy techniques, such as Greedy-GQ, enable a target policy to be learned while following and obtaining data from another (behavior) policy. For many problems, however, actor-critic methods are more practical than action value methods (like Greedy-GQ) because they explicitly represent the policy; consequently, the policy can be stochastic and utilize a large action space. In this paper, we illustrate how to practically combine the generality and learning potential of off-policy learning with the flexibility in action selection given by actor-critic methods. We derive an incremental, linear time and space complexity algorithm that includes eligibility traces, prove convergence under assumptions similar to previous off-policy algorithms, and empirically show better or comparable performance to existing algorithms on standard reinforcement-learning benchmark problems.},
+archivePrefix = {arXiv},
+arxivId = {1205.4839},
+author = {Degris, Thomas and White, Martha and Sutton, Richard S.},
+eprint = {1205.4839},
+file = {:Users/ludi/Documents/Mendeley Desktop/2012-ICML-Off-Policy Actor-Critic.pdf:pdf},
+isbn = {9781450312851},
+journal = {Proceedings of the 29th International Conference on Machine Learning, ICML 2012},
+mendeley-groups = {RL},
+month = {may},
+pages = {457--464},
+title = {{Off-Policy Actor-Critic}},
+url = {http://arxiv.org/abs/1205.4839},
+volume = {1},
+year = {2012}
 }
 
 
-@article{en2,
-   author = {Carlstrom, Charles T and Fuerst, Timothy S},
-   title = {{Agency Costs, Net Worth, and Business Fluctuations: A Computable General Equilibrium Analysis}},
-   journal = {The American Economic Review},
-   pages = {893-910},
-   ISSN = {0002-8282},
-   year = {1997},
-   type = {Journal Article}
+
+@article{Mnih2013,
+abstract = {We propose a conceptually simple and lightweight framework for deep reinforcement learning that uses asynchronous gradient descent for optimization of deep neural network controllers. We present asynchronous variants of four standard reinforcement learning algorithms and show that parallel actor-learners have a stabilizing effect on training allowing all four methods to successfully train neural network controllers. The best performing method, an asynchronous variant of actor-critic, surpasses the current state-of-the-art on the Atari domain while training for half the time on a single multi-core CPU instead of a GPU. Furthermore, we show that asynchronous actor-critic succeeds on a wide variety of continuous motor control problems as well as on a new task of navigating random 3D mazes using a visual input.},
+archivePrefix = {arXiv},
+arxivId = {1602.01783},
+author = {Mnih, Volodymyr and Badia, Adri{\`{a}} Puigdom{\`{e}}nech and Mirza, Mehdi and Graves, Alex and Lillicrap, Timothy P. and Harley, Tim and Silver, David and Kavukcuoglu, Koray},
+eprint = {1602.01783},
+file = {:Users/ludi/Documents/Mendeley Desktop/2016-ICML-Asynchronous Methods for Deep Reinforcement Learning.pdf:pdf},
+journal = {International Conference on Machine Learning},
+mendeley-groups = {RL},
+month = {feb},
+title = {{Asynchronous Methods for Deep Reinforcement Learning}},
+url = {http://arxiv.org/abs/1602.01783},
+volume = {48},
+year = {2016}
 }
 
-@article{en1,
-   author = {Quadrini, Vincenzo},
-   title = {{Financial Frictions in Macroeconomic Fluctuations}},
-   journal = {FRB Richmond Economic Quarterly},
-   volume = {97},
-   number = {3},
-   pages = {209-254},
-   year = {2011},
-   type = {Journal Article}
+@article{Harutyunyan2016,
+abstract = {In this work, we take a fresh look at some old and new algorithms for off-policy, return-based reinforcement learning. Expressing these in a common form, we derive a novel algorithm, Retrace({\$}\backslashlambda{\$}), with three desired properties: (1) it has low variance; (2) it safely uses samples collected from any behaviour policy, whatever its degree of "off-policyness"; and (3) it is efficient as it makes the best use of samples collected from near on-policy behaviour policies. We analyze the contractive nature of the related operator under both off-policy policy evaluation and control settings and derive online sample-based algorithms. We believe this is the first return-based off-policy control algorithm converging a.s. to {\$}Q{\^{}}*{\$} without the GLIE assumption (Greedy in the Limit with Infinite Exploration). As a corollary, we prove the convergence of Watkins' Q({\$}\backslashlambda{\$}), which was an open problem since 1989. We illustrate the benefits of Retrace({\$}\backslashlambda{\$}) on a standard suite of Atari 2600 games.},
+archivePrefix = {arXiv},
+arxivId = {1606.02647},
+author = {Munos, R{\'{e}}mi and Stepleton, Tom and Harutyunyan, Anna and Bellemare, Marc G},
+eprint = {1606.02647},
+file = {:Users/ludi/Documents/Mendeley Desktop/2016-NIPS-Safe and efficient off-policy reinforcement learning.pdf:pdf},
+mendeley-groups = {RL},
+month = {jun},
+number = {Nips},
+title = {{Safe and Efficient Off-Policy Reinforcement Learning}},
+url = {http://arxiv.org/abs/1606.02647},
+year = {2016}
 }
 
-@article{cn1,
-   author = {方军雄},
-   key = {fang1 jun1 xiong2},
-   title = {{所有制、制度环境与信贷资金配置}},
-   journal = {经济研究},
-   number = {12},
-   pages = {82-92},
-   ISSN = {0577-9154},
-   year = {2007},
-   type = {Journal Article}
+@article{Wang2016,
+abstract = {This paper presents an actor-critic deep reinforcement learning agent with experience replay that is stable, sample efficient, and performs remarkably well on challenging environments, including the discrete 57-game Atari domain and several continuous control problems. To achieve this, the paper introduces several innovations, including truncated importance sampling with bias correction, stochastic dueling network architectures, and a new trust region policy optimization method.},
+archivePrefix = {arXiv},
+arxivId = {1611.01224},
+author = {Wang, Ziyu and Bapst, Victor and Heess, Nicolas and Mnih, Volodymyr and Munos, Remi and Kavukcuoglu, Koray and de Freitas, Nando},
+eprint = {1611.01224},
+file = {:Users/ludi/Documents/Mendeley Desktop/2017-ICLR-SAMPLE EFFICIENT ACTOR-CRITIC WITH EXPERIENCE REPLAY.pdf:pdf},
+journal = {5th International Conference on Learning Representations, ICLR 2017 - Conference Track Proceedings},
+mendeley-groups = {RL},
+month = {nov},
+number = {2016},
+title = {{Sample Efficient Actor-Critic with Experience Replay}},
+url = {http://arxiv.org/abs/1611.01224},
+year = {2016}
 }
 
-@article{cn2,
-   author = {刘凤良 and 章潇萌 and 于泽},
-   key = {liu2 feng4 liang2 zhang1 xiao1 meng2 yu2 ze2},
-   title = {{高投资、结构失衡与价格指数二元分化}},
-   journal = {金融研究},
-   number = {02},
-   pages = {54-69},
-   ISSN = {1002-7246},
-   year = {2017},
-   type = {Journal Article}
+
+@article{Schulman2015,
+abstract = {We describe an iterative procedure for optimizing policies, with guaranteed monotonic improvement. By making several approximations to the theoretically-justified procedure, we develop a practical algorithm, called Trust Region Policy Optimization (TRPO). This algorithm is similar to natural policy gradient methods and is effective for optimizing large nonlinear policies such as neural networks. Our experiments demonstrate its robust performance on a wide variety of tasks: learning simulated robotic swimming, hopping, and walking gaits; and playing Atari games using images of the screen as input. Despite its approximations that deviate from the theory, TRPO tends to give monotonic improvement, with little tuning of hyperparameters.},
+archivePrefix = {arXiv},
+arxivId = {1502.05477},
+author = {Schulman, John and Levine, Sergey and Moritz, Philipp and Jordan, Michael I. and Abbeel, Pieter},
+eprint = {1502.05477},
+file = {:Users/ludi/Documents/Mendeley Desktop/2015-ICML-Trust Region Policy Optimization.pdf:pdf},
+isbn = {9781510810587},
+journal = {32nd International Conference on Machine Learning, ICML 2015},
+mendeley-groups = {RL},
+month = {feb},
+pages = {1889--1897},
+title = {{Trust Region Policy Optimization}},
+url = {http://arxiv.org/abs/1502.05477},
+volume = {3},
+year = {2015}
 }
 
-@article{cn3,
-   author = {吕捷 and 王高望},
-   key = {lv3 jie2 wang2 gao1 wang4},
-   title = {{CPI 与 PPI “背离”的结构性解释}},
-   journal = {经济研究},
-   volume = {50},
-   number = {04},
-   pages = {136-149},
-   ISSN = {0577-9154},
-   year = {2015},
-   type = {Journal Article}
+@article{Wu2017,
+abstract = {In this work, we propose to apply trust region optimization to deep reinforcement learning using a recently proposed Kronecker-factored approximation to the curvature. We extend the framework of natural policy gradient and propose to optimize both the actor and the critic using Kronecker-factored approximate curvature (K-FAC) with trust region; hence we call our method Actor Critic using Kronecker-Factored Trust Region (ACKTR). To the best of our knowledge, this is the first scalable trust region natural gradient method for actor-critic methods. It is also a method that learns non-trivial tasks in continuous control as well as discrete control policies directly from raw pixel inputs. We tested our approach across discrete domains in Atari games as well as continuous domains in the MuJoCo environment. With the proposed methods, we are able to achieve higher rewards and a 2- to 3-fold improvement in sample efficiency on average, compared to previous state-of-the-art on-policy actor-critic methods. Code is available at https://github.com/openai/baselines},
+archivePrefix = {arXiv},
+arxivId = {1708.05144},
+author = {Wu, Yuhuai and Mansimov, Elman and Liao, Shun and Grosse, Roger and Ba, Jimmy},
+eprint = {1708.05144},
+file = {:Users/ludi/Documents/Mendeley Desktop/2017-Scalable trust-region method for deep reinforcement learning using Kronecker-factored approximation.pdf:pdf},
+issn = {10495258},
+journal = {Advances in Neural Information Processing Systems},
+mendeley-groups = {RL},
+month = {aug},
+pages = {5280--5289},
+title = {{Scalable trust-region method for deep reinforcement learning using Kronecker-factored approximation}},
+url = {http://arxiv.org/abs/1708.05144},
+volume = {2017-Decem},
+year = {2017}
 }
 
+@article{Schulman2017,
+abstract = {We propose a new family of policy gradient methods for reinforcement learning, which alternate between sampling data through interaction with the environment, and optimizing a "surrogate" objective function using stochastic gradient ascent. Whereas standard policy gradient methods perform one gradient update per data sample, we propose a novel objective function that enables multiple epochs of minibatch updates. The new methods, which we call proximal policy optimization (PPO), have some of the benefits of trust region policy optimization (TRPO), but they are much simpler to implement, more general, and have better sample complexity (empirically). Our experiments test PPO on a collection of benchmark tasks, including simulated robotic locomotion and Atari game playing, and we show that PPO outperforms other online policy gradient methods, and overall strikes a favorable balance between sample complexity, simplicity, and wall-time.},
+archivePrefix = {arXiv},
+arxivId = {1707.06347},
+author = {Schulman, John and Wolski, Filip and Dhariwal, Prafulla and Radford, Alec and Klimov, Oleg},
+eprint = {1707.06347},
+file = {:Users/ludi/Documents/Mendeley Desktop/2017-Proximal Policy Optimization Algorithms.pdf:pdf},
+mendeley-groups = {RL},
+month = {jul},
+pages = {1--12},
+title = {{Proximal Policy Optimization Algorithms}},
+url = {http://arxiv.org/abs/1707.06347},
+year = {2017}
+}
+
+
+@article{Schaul2015,
+abstract = {Experience replay lets online reinforcement learning agents remember and reuse experiences from the past. In prior work, experience transitions were uniformly sampled from a replay memory. However, this approach simply replays transitions at the same frequency that they were originally experienced, regardless of their significance. In this paper we develop a framework for prioritizing experience, so as to replay important transitions more frequently, and therefore learn more efficiently. We use prioritized experience replay in Deep Q-Networks (DQN), a reinforcement learning algorithm that achieved human-level performance across many Atari games. DQN with prioritized experience replay achieves a new state-of-the-art, outperforming DQN with uniform replay on 41 out of 49 games.},
+archivePrefix = {arXiv},
+arxivId = {1511.05952},
+author = {Schaul, Tom and Quan, John and Antonoglou, Ioannis and Silver, David},
+eprint = {1511.05952},
+file = {:Users/ludi/Documents/Mendeley Desktop/2016-ICLR-PRIORITIZED EXPERIENCE REPLAY.pdf:pdf},
+journal = {4th International Conference on Learning Representations, ICLR 2016 - Conference Track Proceedings},
+mendeley-groups = {RL},
+month = {nov},
+pages = {1--21},
+title = {{Prioritized Experience Replay}},
+url = {http://arxiv.org/abs/1511.05952},
+year = {2015}
+}

@@ -109,8 +109,9 @@
   \RequirePackage[T1]{fontenc}
   \AtEndOfClass{\RequirePackage{microtype}}
 \fi
-\RequirePackage{newtxtext}
-\RequirePackage{newtxmath}
+% \RequirePackage{newtxtext}
+% \RequirePackage{newtxmath}
+% \RequirePackage{unicode-math}
 
 
 \ifdefstring{\ELEGANT@lang}{cn}{
