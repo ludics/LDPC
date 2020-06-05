@@ -1,28 +1,42 @@
 clear;
 
+EbNomin = 1.1;
+EbNomax = 4.5;
+EbNovec = EbNomin:0.2:EbNomax;
+fitEbNo = EbNomin:0.1:EbNomax;
 
 siglen = 837;
 H = generate_BJ();
-[bj_ber, bj_block_err_rate] = get_BER(H, siglen);
+[bj_ber, bj_block_err_rate] = get_BER(H, siglen, EbNomin, EbNomax);
+save('data_bj.mat', 'bj_ber', 'bj_block_err_rate');
 
+figure(1)
+berfit(EbNovec, bj_ber, fitEbNo, [], 'exp');
+figure(2)
+berfit(EbNovec, bj_block_err_rate-eps, fitEbNo, [], 'exp');
+
+EbNomin = 1.1;
+EbNomax = 3.9;
+EbNovec = EbNomin:0.2:EbNomax;
+fitEbNo = EbNomin:0.1:EbNomax;
 siglen = 813;
 load('GF_points.mat');
 H = generate_PG(GF, points);
-
-[pg_ber, pg_block_err_rate] = get_BER(H, siglen);
-
-
-p = 31; k = 33; j = 5;
-siglen = 868;
-H = generate_Array(p, j, k);
-[ar_ber, ar_block_err_rate] = get_BER(H, siglen);
-
-EbNomin = 3.5;
-EbNomax = 4.5;
-fitEbNo = EbNomin:0.1:EbNomax;
-save('data.mat', 'bj_ber', 'bj_block_err_rate', 'pg_ber', 'pg_block_err_rate', 'ar_ber', 'ar_block_err_rate')
-
-figure(1)
+[pg_ber, pg_block_err_rate] = get_BER(H, siglen, EbNomin, EbNomax);
+save('data_pg.mat', 'pg_ber', 'pg_block_err_rate');
+figure(3)
 berfit(EbNovec, pg_ber, fitEbNo, [], 'exp');
-figure(2)
-berfit(EbNovec, pg_block_err_rate, fitEbNo, [], 'exp');
+figure(4)
+berfit(EbNovec, pg_block_err_rate-eps, fitEbNo, [], 'exp');
+
+
+p = 31; k = 31; j = 5;
+siglen = 806;
+H = generate_Array(p, j, k);
+[ar_ber, ar_block_err_rate] = get_BER(H, siglen, EbNomin, EbNomax);
+% save('data_ar.mat', 'ar_ber', 'ar_block_err_rate');
+
+% figure(5)
+% berfit(EbNovec, ar_ber, fitEbNo, [], 'exp');
+% figure(6)
+% berfit(EbNovec, ar_block_err_rate, fitEbNo, [], 'exp');

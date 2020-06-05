@@ -1,4 +1,4 @@
-function [ber, block_err_rate] = get_BER(H, siglen)
+function [ber, block_err_rate] = get_BER(H, siglen, EbNomin, EbNomax)
 A = sparse(H);
 hEnc = comm.LDPCEncoder('ParityCheckMatrix', A);
 hDec = comm.LDPCDecoder('ParityCheckMatrix', A);
@@ -10,8 +10,8 @@ hChan = comm.AWGNChannel('NoiseMethod', 'Signal to noise ratio (SNR)');
 
 
 hErrorCalc = comm.ErrorRate;
-EbNomin = 3.5;
-EbNomax = 4.5;
+% EbNomin = 3.5;
+% EbNomax = 4.5;
 numerrmin = 10;
 EbNovec = EbNomin:0.2:EbNomax;
 numEbNos = length(EbNovec);
