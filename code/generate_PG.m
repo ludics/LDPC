@@ -22,7 +22,10 @@ points = tmp;
 
 idx = [];
 for i=1:length(points)
-    idx = [idx, mod(find(GF==points(i)),n)];
+    try
+        idx = [idx, mod(find(GF==points(i)),n)];
+    catch
+    end
 end
 
 idx = unique(idx);
@@ -31,7 +34,11 @@ row = zeros(1, n);
 H = zeros(n - k, n);
 
 for i = 1:length(idx)
-    row(idx(i)) = 1;
+    if(idx(i)==0)
+        row(n) = 1;
+    else
+        row(idx(i)) = 1;
+    end
 end
 
 row2 = [row, row];
