@@ -223,28 +223,6 @@ C_i^{(2)} = \{\lambda g(x)x^i: \lambda \neq 0 \in GF(q)\}, \quad i=1,2,\dots, q+
 使用MATLAB的通信工具箱对前面构造的三种LDPC码进行了编解码实验（见 \lstinline{./code/get_BER.m}），
 并绘制了对应的分组译码错误概率与比特译码错误概率曲线（见 \lstinline{./code/main.m}）。
 
-    
-
-\figref{fig:pg_bit_er}、\figref{fig:pg_block_er}为PG-LDPC 码的分组译码错误概率与比特译码错误概率曲线。
-在信噪比小于3 dB时，比特错误译码概率较大，大致在(0.01, 0.1)区间；当信噪比超过3 dB时，比特译码错误概率呈指数级下降趋势。
-当信噪比小于3 dB时，分组错误译码概率接近1；同样地，当信噪比超过3 dB时，分组译码错误概率呈指数级下降趋势。
-
-\figref{fig:bj_bit_er}、\figref{fig:bj_block_er}为BJ-LDPC 码的分组译码错误概率
-与比特译码错误概率曲线。\figref{fig:array_bit_er}、\figref{fig:array_block_er}
-为ARRAY-LDPC 码的分组译码错误概率与比特译码错误概率曲线。BJ-LDPC与ARRAY-LDPC的比特译码
-错误概率和分组译码错误概率的变换趋势与PG-LDPC的变化趋势基本一致。相比而言， 当信噪比逐渐
-变大，PG-LDPC的分组译码效果更好，在信噪比为3.8 dB时，其错误概率可以低至 \(10^{-3}\)，
-而其余两种编码错误概率大于\(10^{-2}\)。在比特译码方面，也是 PG-LDPC 效果更好，在信噪比达到3.8 dB
-时，它的错误概率低于\(10^{-5}\)，其余两种编码的错误概率在\(10^{-3}\)左右。
-
-
-\section{总结}
-我们的实验主要分成四个部分。在前三部分，我们使用 matlab 分别构造投影平面循环LDPC码，基于
-广义B-J码的准循环码和基于循环置换矩阵的Array LDPC码。第四部分我们实现迭代译码算法，可视化
-并比较三种编码的分组译码错误概率和比特译码错误概率。通过比较，我们发现比特译码错误概率一致地低于
-分组译码错误概率；PG-LDPC码在比特译码错误概率和分组译码错误概率上都表现更优越。
-
-
 \begin{figure}[htbp]
     \begin{minipage}[t]{0.5\linewidth}
     \centering
@@ -289,6 +267,30 @@ C_i^{(2)} = \{\lambda g(x)x^i: \lambda \neq 0 \in GF(q)\}, \quad i=1,2,\dots, q+
     \label{fig:array_block_er}
     \end{minipage}
     \end{figure}
+
+    
+
+\figref{fig:pg_bit_er}、\figref{fig:pg_block_er}为PG-LDPC 码的分组译码错误概率与比特译码错误概率曲线。
+在信噪比小于3 dB时，比特错误译码概率较大，大致在(0.01, 0.1)区间；当信噪比超过3 dB时，比特译码错误概率呈指数级下降趋势。
+当信噪比小于3 dB时，分组错误译码概率接近1；同样地，当信噪比超过3 dB时，分组译码错误概率呈指数级下降趋势。
+
+\figref{fig:bj_bit_er}、\figref{fig:bj_block_er}为BJ-LDPC 码的分组译码错误概率
+与比特译码错误概率曲线。\figref{fig:array_bit_er}、\figref{fig:array_block_er}
+为ARRAY-LDPC 码的分组译码错误概率与比特译码错误概率曲线。BJ-LDPC与ARRAY-LDPC的比特译码
+错误概率和分组译码错误概率的变换趋势与PG-LDPC的变化趋势基本一致。相比而言， 当信噪比逐渐
+变大，PG-LDPC的分组译码效果更好，在信噪比为3.8 dB时，其错误概率可以低至 \(10^{-3}\)，
+而其余两种编码错误概率大于\(10^{-2}\)。在比特译码方面，也是 PG-LDPC 效果更好，在信噪比达到3.8 dB
+时，它的错误概率低于\(10^{-5}\)，其余两种编码的错误概率在\(10^{-3}\)左右。
+
+
+\section{总结}
+我们的实验主要分成四个部分。在前三部分，我们使用 matlab 分别构造投影平面循环LDPC码，基于
+广义B-J码的准循环码和基于循环置换矩阵的Array LDPC码。第四部分我们实现迭代译码算法，可视化
+并比较三种编码的分组译码错误概率和比特译码错误概率。通过比较，我们发现比特译码错误概率一致地低于
+分组译码错误概率；PG-LDPC码在比特译码错误概率和分组译码错误概率上都表现更优越。
+
+
+
 
 
 
