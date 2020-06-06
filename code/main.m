@@ -1,5 +1,6 @@
 clear;
 
+
 %%
 % BJ-LDPC
 EbNomin = 1.1;
@@ -43,7 +44,7 @@ fitEbNo = EbNomin:0.1:EbNomax;
 
 p = 31; k = 33; j = 5;
 siglen = 868;
-H = arrayLDPC(p, j, k);
+H = generate_Array(p, j, k);
 [ar_ber, ar_block_err_rate] = get_BER(H, siglen, EbNomin, EbNomax);
 save('data_ar.mat', 'ar_ber', 'ar_block_err_rate');
 % 
